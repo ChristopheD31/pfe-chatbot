@@ -8,6 +8,5 @@ describe('Post Endpoints', () => {
         message: "this is a test",
       })
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('text', "this is a test");
   })
 })

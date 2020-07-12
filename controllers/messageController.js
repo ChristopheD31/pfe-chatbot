@@ -1,18 +1,14 @@
-const { Wit, log } = require('node-wit');
-// TODO : require Chatbot class instance
+const Chatbot = require('../models/Chatbot');
+const WitAi = require('../models/WitAi');
+
+// Chatbot instance using strategy pattern
+const wit = new WitAi();
+const chatbot = new Chatbot(wit);
 
 exports.extractFromMessage = function (req, res) {
 
-    // TODO : encapsulate all the following logic by a call on getMessageIntention() on a chatbot class/instance
-
     let message = req.body.message;
-
-    const client = new Wit({
-        accessToken: "GKH7ZZ26SXF2SPO6OEV2W6PHHBZRXFHW",
-        //logger: new log.Logger(log.DEBUG) // optional
+    let intent = chatbot.getIntent(message).then(response => {
+        res.json(response)
     });
-
-    client.message(message).then(response =>{
-        res.json(response);
-    })
 };
