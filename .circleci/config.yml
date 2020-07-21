@@ -13,6 +13,8 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+      - store_test_results:
+          path: test-results
 
 workflows:
   heroku-deploy:
@@ -24,5 +26,3 @@ workflows:
           filters:
             branches:
               only: master
-      - store_test_results:
-          path: test-results
