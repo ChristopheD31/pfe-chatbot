@@ -15,10 +15,10 @@ jobs:
             - run: npm test
 
 workflows:
-    heroku-deploy:
-      jobs:
-        - build-and-test
-        - heroku/deploy-via-git:
+  heroku-deploy:
+    jobs:
+      - build-and-test
+      - heroku/deploy-via-git:
           requires:
             - build-and-test
           filters:
