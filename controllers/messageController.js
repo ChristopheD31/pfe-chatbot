@@ -1,5 +1,5 @@
 const Chatbot = require('../models/Chatbot');
-const WitAi = require('../models/WitAi');
+const WitAi = require('../models/strategies/WitAi');
 
 // Chatbot instance using strategy pattern
 const wit = new WitAi();
@@ -13,7 +13,7 @@ exports.extractFromMessage = function (req, res) {
     });
 };
 
-exports.GetResponseFromIntent = function (req, res) {
+exports.getResponseFromIntent = function (req, res) {
 
     let message = req.body.message;
     let intent = chatbot.getResponse(intent).then(response => {

@@ -1,8 +1,5 @@
 const { Wit } = require("node-wit");
-const goose = require('../models/mongoose');
-const responseSchema = require('../models/responseSchema');
-const response = require('../models/response');
-
+const responseSchema = require('../goose');
 
 //Wit AI Strategy
 function WitAi() {
