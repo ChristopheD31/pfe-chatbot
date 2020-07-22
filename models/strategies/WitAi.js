@@ -1,5 +1,10 @@
 const { Wit } = require("node-wit");
+<<<<<<< Updated upstream:models/strategies/WitAi.js
 const responseSchema = require('../goose');
+=======
+
+
+>>>>>>> Stashed changes:models/WitAi.js
 
 //Wit AI Strategy
 function WitAi() {
@@ -13,7 +18,6 @@ function WitAi() {
             return intents;
         })
     },
-
     this.getResponse = function(intent){
         return responseSchema.findResponse(intent)
     },

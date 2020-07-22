@@ -11,15 +11,20 @@ db.once('open', function () {
 });
 
 const responseSchema = new mongoose.Schema({
-  Intention: { type: String, required: true, unique: true }
+  Intention: { type: String, required: true, unique: false }
   , Response: { type: String, required: true }
 });
 
-responseSchema.methods.conLog = function () {
-  const greeting = this.Intention
-    ? "L'intention: " + this.Intention + " et la réponse est" + this.Response
-    : "Aucune Intention";
-  console.log(greeting);
+
+responseSchema.statics.findResponse = async function (intent) {
+  var reply;
+  return this.findOne({ Intention: intent }, function (err, rep) {
+  });
+  reply = await query.exec().then(rep => {
+    console.log(rep.response)
+    return rep.Response
+  });
+  return reply
 };
 
 responseSchema.methods.conLog = function () {
@@ -30,7 +35,7 @@ responseSchema.methods.conLog = function () {
 };
 
 
-responseSchema.methods.findResponse = async function (intent) {
+responseSchema.methods.modelFindResponse = async function (intent) {
   var reply;
   var query = response.findOne({ Intention: intent }, function (err, rep) {
   });
@@ -45,11 +50,8 @@ const response = mongoose.model('Response', responseSchema);
 const activite = new response({ Intention: 'Activities', Response: 'Tu peux aller marcher' });
 
 
-
 // activite.conLog();
-activite.findResponse("Activities").then(fuckyou =>
-  console.log(fuckyou)
-  );
+response.findResponse("Activities");
 
 
 
