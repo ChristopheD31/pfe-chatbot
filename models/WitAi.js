@@ -1,4 +1,8 @@
 const { Wit } = require("node-wit");
+const goose = require('../models/mongoose');
+const responseSchema = require('../models/responseSchema');
+const response = require('../models/response');
+
 
 //Wit AI Strategy
 function WitAi() {
@@ -9,11 +13,16 @@ function WitAi() {
     
     this.getIntent = function (message) {
         return this.client.message(message).then(({ entities, intents, traits }) => {
-            // console.log(intents);
-            // console.log(entities);
-            // console.log(traits);
             return intents;
         })
+    },
+
+    this.getResponse = function(intent){
+        return responseSchema.findResponse(intent)
+    },
+
+    this.setResponse =  function(intent,response){
+        return this.chatbotAi.setResponse(intent,response);
     }
 };
 

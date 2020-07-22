@@ -12,3 +12,11 @@ exports.extractFromMessage = function (req, res) {
         res.json(response)
     });
 };
+
+exports.GetResponseFromIntent = function (req, res) {
+
+    let message = req.body.message;
+    let intent = chatbot.getResponse(intent).then(response => {
+        res.json(response)
+    });
+};
