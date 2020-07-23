@@ -8,6 +8,7 @@ var messageController = require('../controllers/messageController');
 router.post('/', messageController.extractFromMessage);
 
 router.get('/reply', messageController.getResponseFromIntent);
+router.post('/reply', messageController.SetResponseToIntent);
 
 router.get('/', function(req, res, next) {
     res.render('error', { message: 'GET request not permitted on this endpoint', error: {status: 405} });

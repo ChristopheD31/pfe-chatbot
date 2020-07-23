@@ -28,3 +28,11 @@ exports.getResponseFromIntent = function (req, res) {
         res.json(response)
     });
 };
+
+
+exports.SetResponseToIntent = function (req, res) {
+    let message = req.body.message;
+    let response = req.body.response;
+    let intent = database.setResponse(message,response)
+    res.json(response +" est maintenant configuré à " + message)
+};

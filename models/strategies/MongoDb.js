@@ -24,16 +24,21 @@ function MongoDb() {
         var query =  this.response.findOne({ Intention: intent }, function (err, rep) {
         });
         var reply =  query.exec().then(rep => {
-          console.log(rep.response)
+          console.log(rep.response);
           return rep.Response
         });
 
         return reply
     },
 
-    this.setResponse =  function(intent,response){
-        
-        return this.chatbotAi.setResponse(intent,response);
+    this.setResponse =  function(intent,newResponse){
+        var query = { Intention: intent }
+        this.response.findOneAndUpdate(query,{Response: newResponse},{upsert: true, useFindAndModify :false}, function(err, res) {
+            // Deal with the response data/error
+            console.log(res);
+        });
+        console.log("l'intention " + intent+" à été ajouteé ou changer à : "+ newResponse)
+        // return this.chatbotAi.setResponse(intent,response);
     }
 };
 
