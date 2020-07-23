@@ -1,5 +1,6 @@
 const { Wit } = require("node-wit");
 
+
 //Wit AI Strategy
 function WitAi() {
     this.client = new Wit({
@@ -9,9 +10,6 @@ function WitAi() {
     
     this.getIntent = function (message) {
         return this.client.message(message).then(({ entities, intents, traits }) => {
-            // console.log(intents);
-            // console.log(entities);
-            // console.log(traits);
             return intents;
         })
     }
