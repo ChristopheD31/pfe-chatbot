@@ -8,18 +8,22 @@ Database.prototype = {
         this.database = database;
     },
 
-    connect: function(connectionString){
+    connect: function (connectionString) {
         return this.database.connect(connectionString);
     },
-    
-    getResponse: function(intent){
-        return this.database.getResponse(intent)
+
+    getAll: function () {
+
     },
 
-    setResponse: function(intent, response){
-        return this.database.setResponse(intent, response);
+    findOne: function (document) {
+        return this.database.findOne(document);
+    },
+
+    update: function (document) {
+        return this.database.update(document);
     }
-    
+
 };
 
 module.exports = Database;

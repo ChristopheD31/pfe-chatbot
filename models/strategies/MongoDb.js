@@ -1,47 +1,48 @@
 const mongoose = require('mongoose');
-
+const connectionUri = process.env.MONGO_CONNECTION_URI;
 
 //Wit AI Strategy
 function MongoDb() {
-    this.db = mongoose.connection,
-    this.responseSchema = new mongoose.Schema({
+    this.db = mongoose.connection;
+
+    //Mongoose model
+    this.answerSchema = new mongoose.Schema({
         Intention: { type: String, required: true, unique: true }
-        , Response: { type: String, required: true }
-      }),
-    this.response = mongoose.model('Response', this.responseSchema),
-    this.connect = function(){
+        , Answer: { type: String, required: true }
+    })
 
-        //à changer pour pouvoir connecter ailleur que localhost
-        mongoose.connect('mongodb://localhost/chatbot', { useNewUrlParser: true, useUnifiedTopology: true });
+    this.answers = mongoose.model('Answer', this.answerSchema)
+
+    this.connect = function () {
+        mongoose.connect(connectionUri, { useNewUrlParser: true, useUnifiedTopology: true });
+
         this.db.on('error', console.error.bind(console, 'connection error:'));
+        
         this.db.once('open', function () {
-        // we're connected!
-        console.log("pass")
+            console.log("Successfully connected to DB " + mongoose.connection.name);
         });
-    },
-    
-    this.getResponse = function(intent){
-        var query =  this.response.findOne({ Intention: intent }, function (err, rep) {
-        });
-        var reply =  query.exec().then(rep => {
-          console.log(rep.response);
-          return rep.Response
+    }
+
+    this.findOne = function (intention) {
+        let query = this.answers.findOne({ Intention: intention });
+
+        let reply = query.exec().then(document => {
+            console.log(document);
+            return document;
         });
 
-        return reply
-    },
+        return reply;
+    }
 
-    this.setResponse =  function(intent,newResponse){
-        var query = { Intention: intent }
-        this.response.findOneAndUpdate(query,{Response: newResponse},{upsert: true, useFindAndModify :false}, function(err, res) {
-            // Deal with the response data/error
-            console.log(res);
+    this.update = function (document) {
+        let conditions = { Intention: document.intention };
+        let query = this.answers.findOneAndUpdate(conditions, { Answer: document.answer }, { upsert: true, useFindAndModify: false });
+
+        return query.exec().then(document => {
+            console.log(document);
+            return document;
         });
-        console.log("l'intention " + intent+" à été ajouteé ou changer à : "+ newResponse)
-        // return this.chatbotAi.setResponse(intent,response);
     }
 };
-
-
 
 module.exports = MongoDb;
