@@ -43,6 +43,16 @@ function MongoDb() {
             return document;
         });
     }
+
+    this.delete = function (document) {
+        let conditions = { Intention: document.intention };
+        let query = this.answers.findOneAndDelete(conditions);
+
+        return query.exec().then(document => {
+            console.log(document);
+            return document;
+        });
+    }
 };
 
 module.exports = MongoDb;

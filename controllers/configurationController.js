@@ -23,3 +23,13 @@ exports.addAnswerToIntent = function (req, res) {
         res.json({"error": error.message, "stack": error.stack});
     });    
 };
+
+exports.dropAnswerToIntent = function (req, res) {
+    let message = req.body.message;
+
+    database.delete(req.body).then(response => {
+        res.json({"message": "delete successful"});
+    }).catch(error => {
+        res.json({"error": error.message, "stack": error.stack});
+    });
+};

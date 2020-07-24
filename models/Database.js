@@ -22,6 +22,10 @@ Database.prototype = {
 
     update: function (document) {
         return this.database.update(document);
+    },
+
+    delete: function (document) {
+        return this.database.delete(document);
     }
 
 };
