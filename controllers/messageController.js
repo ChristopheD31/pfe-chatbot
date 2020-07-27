@@ -9,30 +9,28 @@ const MongoDb = require('../models/strategies/MongoDb');
 const wit = new WitAi();
 const chatbot = new Chatbot(wit);
 
-const mongoDb = new MongoDb();
-mongoDb.connect();
-const database = new Database(mongoDb);
+// Database instance using strategy pattern
+// TODO : make this a singleton
+// const mongoDb = new MongoDb();
+// mongoDb.connect();
+// const database = new Database(mongoDb);
 
-
-exports.extractFromMessage = function (req, res) {
-
+exports.extractIntentFromMessage = function (req, res) {
     let message = req.body.message;
-    let intent = chatbot.getIntent(message).then(response => {
+
+    chatbot.getIntent(message).then(response => {
         res.json(response)
     });
 };
 
-exports.getResponseFromIntent = function (req, res) {
+exports.getReplyToMessage = function (req, res) {
     let message = req.body.message;
-    let intent = database.getResponse(message).then(response => {
-        res.json(response)
-    });
-};
 
+    chatbot.getIntent(message).then(intent => {
+        let intentValue = intent[0].name;
 
-exports.SetResponseToIntent = function (req, res) {
-    let message = req.body.message;
-    let response = req.body.response;
-    let intent = database.setResponse(message,response)
-    res.json(response +" est maintenant configuré à " + message)
+        database.findOne(intentValue).then(response => {
+            res.json(response);
+        });
+    })
 };

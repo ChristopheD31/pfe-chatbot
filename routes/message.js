@@ -4,11 +4,11 @@ var router = express.Router();
 // Require controller modules
 var messageController = require('../controllers/messageController');
 
-// Message related routes
-router.post('/', messageController.extractFromMessage);
+// Connect routes to controller methods
 
-router.get('/reply', messageController.getResponseFromIntent);
-router.post('/reply', messageController.SetResponseToIntent);
+router.post('/intent', messageController.extractIntentFromMessage);
+
+router.post('/reply', messageController.getReplyToMessage);
 
 router.get('/', function(req, res, next) {
     res.render('error', { message: 'GET request not permitted on this endpoint', error: {status: 405} });
