@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Database = require('../../models/Database');
 
 //Mongoose strategy
 function MongoDb() {
