@@ -10,6 +10,13 @@ var messageRouter = require('./routes/message');
 
 var app = express();
 
+const mongoose = require('mongoose');
+const connectionUri = process.env.MONGODB_URI || "mongodb://localhost/chatbot";
+
+//Establishing connextion to database at app startup
+mongoose.connect(connectionUri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
