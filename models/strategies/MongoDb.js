@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const connectionUri = process.env.MONGO_CONNECTION_URI;
+const Database = require('../../models/Database');
 
-//Wit AI Strategy
+//Mongoose strategy
 function MongoDb() {
     this.db = mongoose.connection;
 
@@ -12,16 +12,6 @@ function MongoDb() {
     })
 
     this.answers = mongoose.model('Answer', this.answerSchema)
-
-    this.connect = function () {
-        mongoose.connect(connectionUri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-        this.db.on('error', console.error.bind(console, 'connection error:'));
-        
-        this.db.once('open', function () {
-            console.log("Successfully connected to DB " + mongoose.connection.name);
-        });
-    }
 
     this.findOne = function (intention) {
         let query = this.answers.findOne({ Intention: intention });

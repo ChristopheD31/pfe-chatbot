@@ -1,11 +1,12 @@
 const Database = require('../models/Database');
 const MongoDb = require('../models/strategies/MongoDb');
 
+
 // Database instance using strategy pattern
-// TODO : make this a singleton
-const mongoDb = new MongoDb();
-mongoDb.connect();
-const database = new Database(mongoDb);
+// Connection is made at index.js
+const gooseDB = new MongoDb() 
+const singleDB = new Database(gooseDB);
+
 
 exports.addConfiguration = function (req, res) {
     res.send('NOT IMPLEMENTED: addConfiguration');
@@ -17,7 +18,7 @@ exports.listConfiguration = function (req, res) {
 
 exports.addAnswerToIntent = function (req, res) {
     
-    database.update(req.body).then(response => {
+    singleDB.update(req.body).then(response => {
         res.json({"message": "update successful"});
     }).catch(error => {
         res.json({"error": error.message, "stack": error.stack});
@@ -27,7 +28,7 @@ exports.addAnswerToIntent = function (req, res) {
 exports.dropAnswerToIntent = function (req, res) {
     let message = req.body.message;
 
-    database.delete(req.body).then(response => {
+    singleDB.delete(req.body).then(response => {
         res.json({"message": "delete successful"});
     }).catch(error => {
         res.json({"error": error.message, "stack": error.stack});
