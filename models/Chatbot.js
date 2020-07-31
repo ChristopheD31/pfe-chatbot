@@ -9,6 +9,9 @@ Chatbot.prototype = {
     },
     getIntent: function (message) {
         return this.chatbotAi.getIntent(message);
+    },
+    getAllIntents: function () {
+        return this.chatbotAi.getAllIntents();
     }
 };
 
