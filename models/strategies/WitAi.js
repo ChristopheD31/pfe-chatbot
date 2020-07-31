@@ -10,7 +10,6 @@ function WitAi() {
 
     this.getIntent = function (message) {
         return this.client.message(message).then(({ entities, intents, traits }) => {
-            console.log(intents);
             return VerifyConfidence(intents);
         })
     };

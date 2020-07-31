@@ -27,7 +27,6 @@ function MongoDb() {
         let query = this.answers.findOneAndUpdate(conditions, { Answer: document.answer }, { upsert: true, useFindAndModify: false });
 
         return query.exec().then(document => {
-            console.log(document);
             return document;
         });
     }
@@ -37,7 +36,6 @@ function MongoDb() {
         let query = this.answers.findOneAndDelete(conditions);
 
         return query.exec().then(document => {
-            console.log(document);
             return document;
         });
     }
