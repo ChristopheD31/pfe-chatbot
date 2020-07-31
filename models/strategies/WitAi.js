@@ -1,17 +1,16 @@
-const { Wit } = require('node-wit');
+const { Wit } = require("node-wit");
+const constants = require("../../parameters/chatbotConstants");
 const axios = require('axios');
-
 
 //Wit AI Strategy
 function WitAi() {
     this.client = new Wit({
         accessToken: process.env.WIT_TOKEN,
-        //  logger: new log.Logger(log.INFO)
     });
-    
+
     this.getIntent = function (message) {
         return this.client.message(message).then(({ entities, intents, traits }) => {
-            return intents;
+            return VerifyConfidence(intents);
         })
     };
 
@@ -25,5 +24,15 @@ function WitAi() {
         });
     };
 };
+
+function VerifyConfidence(intents) {
+    let treshold = constants.INTENT_CONFIDENCE_TRESHOLD;
+
+    if (!intents.find(intent => intent.confidence >= treshold)) {
+        return [{"name":"default"}];
+    }
+    
+    return intents;
+}
 
 module.exports = WitAi;
