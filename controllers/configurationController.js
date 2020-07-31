@@ -4,8 +4,8 @@ const Database = require('../models/Database');
 const MongoDb = require('../models/strategies/MongoDb');
 
 // Database instance using strategy pattern
-// const gooseDB = new MongoDb() 
-// const singleDB = new Database(gooseDB);
+const gooseDB = new MongoDb() 
+const singleDB = new Database(gooseDB);
 
 exports.listConfiguration = function (req, res) {
     res.send('NOT IMPLEMENTED: listConfiguration');
