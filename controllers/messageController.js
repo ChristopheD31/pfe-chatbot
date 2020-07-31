@@ -4,16 +4,13 @@ const WitAi = require('../models/strategies/WitAi');
 const Database = require('../models/Database');
 const MongoDb = require('../models/strategies/MongoDb');
 
-
 // Chatbot instance using strategy pattern
 const wit = new WitAi();
 const chatbot = new Chatbot(wit);
 
 // Database instance using strategy pattern
-// TODO : make this a singleton
-// const mongoDb = new MongoDb();
-// mongoDb.connect();
-// const database = new Database(mongoDb);
+const gooseDB = new MongoDb() 
+const singleDB = new Database(gooseDB);
 
 exports.extractIntentFromMessage = function (req, res) {
     let message = req.body.message;
@@ -29,7 +26,7 @@ exports.getReplyToMessage = function (req, res) {
     chatbot.getIntent(message).then(intent => {
         let intentValue = intent[0].name;
 
-        database.findOne(intentValue).then(response => {
+        singleDB.findOne(intentValue).then(response => {
             res.json(response);
         });
     })

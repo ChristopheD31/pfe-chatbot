@@ -1,16 +1,11 @@
+// This controller will manage all the possible configurable database elements/
+
 const Database = require('../models/Database');
 const MongoDb = require('../models/strategies/MongoDb');
 
-
 // Database instance using strategy pattern
-// Connection is made at index.js
-const gooseDB = new MongoDb() 
-const singleDB = new Database(gooseDB);
-
-
-exports.addConfiguration = function (req, res) {
-    res.send('NOT IMPLEMENTED: addConfiguration');
-};
+// const gooseDB = new MongoDb() 
+// const singleDB = new Database(gooseDB);
 
 exports.listConfiguration = function (req, res) {
     res.send('NOT IMPLEMENTED: listConfiguration');

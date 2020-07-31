@@ -1,11 +1,11 @@
 const { Wit } = require("node-wit");
 const constants = require("../../parameters/chatbotConstants");
+const axios = require('axios');
 
 //Wit AI Strategy
 function WitAi() {
     this.client = new Wit({
         accessToken: process.env.WIT_TOKEN,
-        //  logger: new log.Logger(log.INFO)
     });
 
     this.getIntent = function (message) {
@@ -13,7 +13,17 @@ function WitAi() {
             console.log(intents);
             return VerifyConfidence(intents);
         })
-    }
+    };
+
+    this.getAllIntents = function () {
+        return axios({
+            method: 'get',
+            url: 'https://api.wit.ai/intents',
+            headers: {
+                "Authorization": "Bearer " + process.env.WIT_TOKEN
+            }
+        });
+    };
 };
 
 function VerifyConfidence(intents) {
