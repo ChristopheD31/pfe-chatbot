@@ -16,7 +16,6 @@ function MongoDb() {
         let query = this.answers.findOne({ Intention: intention });
 
         let reply = query.exec().then(document => {
-            console.log(document);
             return document;
         });
 
