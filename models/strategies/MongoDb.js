@@ -12,6 +12,7 @@ function MongoDb() {
     this.db = mongoose.connection;
 
     this.findOne = function (intention) {
+        if(!document.intention) throw { name:  "ParamError" , message :"Missing parameters"};
         let query = answers.findOne({ Intention: intention });
 
         let reply = query.exec().then(document => {
@@ -22,6 +23,8 @@ function MongoDb() {
     }
 
     this.update = function (document) {
+
+        if(!document.intention || !document.answer) throw { name:  "ParamError" , message :"Missing parameters"};
         let conditions = { Intention: document.intention };
         let query = answers.findOneAndUpdate(conditions, { Answer: document.answer }, { upsert: true, useFindAndModify: false });
 
@@ -31,6 +34,7 @@ function MongoDb() {
     }
 
     this.delete = function (document) {
+        if(!document.intention) throw { name:  "ParamError" , message :"Missing parameters"};
         let conditions = { Intention: document.intention };
         let query = answers.findOneAndDelete(conditions);
 
