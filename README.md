@@ -11,7 +11,11 @@ Cet API s'intègre dans la solution en étant l'intermédiaire du traitement des
 
 ## API
 
-La documentation complète a été [réalisée sur Postman](https://documenter.getpostman.com/view/9506110/T1Dv9FAg?version=latest). L'API est hébergé sur la plateforme Heroku et est [accessible publiquement](https://pfechatbot-nlpapi.herokuapp.com/).
+#### Accès
+L'API est hébergé sur la plateforme Heroku et est [accessible publiquement](https://pfechatbot-nlpapi.herokuapp.com/).
+
+#### Documentation
+La documentation complète a été réalisée sur Postman et est [accessible publiquement](https://documenter.getpostman.com/view/9506110/T1Dv9FAg?version=latest).
 
 #### Déploiement automatique
 L'outil [CircleCi](https://circleci.com/) est utilisé afin de déclencher un traitement comprenant une suite de tests et un déploiement automatique sur Heroku lorsque du code est poussé sur la branche _master_. La configuration propre à cet outil est effectuée dans le dossier [.circleci](/.circleci/config.yml).
