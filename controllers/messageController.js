@@ -17,7 +17,9 @@ exports.extractIntentFromMessage = function (req, res) {
 
     chatbot.getIntent(message).then(response => {
         res.json(response)
-    });
+    }).catch(error => {
+        res.json({"error Type": error.name, "error": error.message, "stack": error.stack});
+    });;
 };
 
 exports.getReplyToMessage = function (req, res) {
@@ -28,6 +30,10 @@ exports.getReplyToMessage = function (req, res) {
 
         singleDB.findOne(intentValue).then(response => {
             res.json(response);
+        }).catch(error => {
+            res.json({"error Type": error.name, "error": error.message, "stack": error.stack});
         });
-    })
+    }).catch(error => {
+        res.json({"error Type": error.name, "error": error.message, "stack": error.stack});
+    });
 };
