@@ -16,7 +16,7 @@ exports.addAnswerToIntent = function (req, res) {
     singleDB.update(req.body).then(response => {
         res.json({"message": "update successful"});
     }).catch(error => {
-        res.json({"error": error.message, "stack": error.stack});
+        res.json({"error Type": error.name, "error": error.message, "stack": error.stack});
     });    
 };
 
@@ -26,6 +26,6 @@ exports.dropAnswerToIntent = function (req, res) {
     singleDB.delete(req.body).then(response => {
         res.json({"message": "delete successful"});
     }).catch(error => {
-        res.json({"error": error.message, "stack": error.stack});
+        res.json({"error Type": error.name, "error": error.message, "stack": error.stack});
     });
 };
