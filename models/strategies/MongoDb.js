@@ -12,10 +12,11 @@ function MongoDb() {
     this.db = mongoose.connection;
 
     this.findOne = function (intention) {
-        if(!document.intention) throw { name:  "ParamError" , message :"Missing parameters"};
+        if(!intention) throw { name:  "ParamError" , message :"Missing parameters"};
         let query = answers.findOne({ Intention: intention });
 
         let reply = query.exec().then(document => {
+            if (!document) throw { name:  "TODO" , message :"Handle no document"};
             return document;
         });
 
