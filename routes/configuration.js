@@ -10,4 +10,6 @@ router.get('/', configurationController.listConfiguration);
 
 router.post('/reply', configurationController.addAnswerToIntent);
 
+router.delete('/reply', configurationController.dropAnswerToIntent);
+
 module.exports = router;
