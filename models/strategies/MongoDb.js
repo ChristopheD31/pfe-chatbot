@@ -43,6 +43,7 @@ function MongoDb() {
         let query = answers.findOneAndDelete(conditions);
 
         return query.exec().then(document => {
+            if (!document) throw { name: "NoDocument", message: "No documents to delete" }
             return document;
         });
     }
