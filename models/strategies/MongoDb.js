@@ -29,7 +29,7 @@ function MongoDb() {
         let query = answers.find();
 
         let reply = query.exec().then(documents => {
-            if(!documents) return this.getDefault();
+            if (!document) throw { name: "NoDocuments", message: "There are no documents to return in the Database" }
             return documents;
         }).catch(error => {
             throw error
