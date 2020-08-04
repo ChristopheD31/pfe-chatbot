@@ -25,6 +25,20 @@ function MongoDb() {
         return reply;
     }
 
+    this.getAll = function(){
+        let query = answers.find();
+
+        let reply = query.exec().then(documents => {
+            if (!document) throw { name: "NoDocuments", message: "There are no documents to return in the Database" }
+            return documents;
+        }).catch(error => {
+            throw error
+        });
+        
+        return reply;
+
+    }
+
     this.update = function (document) {
 
         if (!document.intention || !document.answer) throw { name: "ParamError", message: "Missing parameters" };

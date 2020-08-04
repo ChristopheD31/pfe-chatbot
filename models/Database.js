@@ -13,7 +13,7 @@ Database.prototype = {
     },
 
     getAll: function () {
-
+        return this.database.getAll();
     },
 
     findOne: function (document) {
