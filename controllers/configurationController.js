@@ -7,12 +7,15 @@ const MongoDb = require('../models/strategies/MongoDb');
 const gooseDB = new MongoDb() 
 const singleDB = new Database(gooseDB);
 
-exports.listConfiguration = function (req, res) {
-    res.send('NOT IMPLEMENTED: listConfiguration');
+exports.listAll = function (req, res) {
+    singleDB.getAll().then(response => {
+        res.json(response);
+    }).catch(error => {
+        res.json({"error Type": error.name, "error": error.message, "stack": error.stack});
+    });
 };
 
-exports.addAnswerToIntent = function (req, res) {
-    
+exports.addAnswerToIntent = function (req, res) {    
     singleDB.update(req.body).then(response => {
         res.json({"message": "update successful"});
     }).catch(error => {

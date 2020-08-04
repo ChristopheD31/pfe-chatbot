@@ -5,8 +5,7 @@ var router = express.Router();
 var configurationController = require('../controllers/configurationController');
 
 // Connect routes to controller methods
-// router.post('/', configurationController.addConfiguration);
-router.get('/', configurationController.listConfiguration);
+router.get('/replies', configurationController.listAll);
 
 router.post('/reply', configurationController.addAnswerToIntent);
 

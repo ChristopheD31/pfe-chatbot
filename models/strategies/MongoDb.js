@@ -25,6 +25,20 @@ function MongoDb() {
         return reply;
     }
 
+    this.getAll = function(){
+        let query = answers.find();
+
+        let reply = query.exec().then(documents => {
+            if(!documents) return this.getDefault();
+            return documents;
+        }).catch(error => {
+            throw error
+        });
+        
+        return reply;
+
+    }
+
     this.update = function (document) {
 
         if (!document.intention || !document.answer) throw { name: "ParamError", message: "Missing parameters" };
