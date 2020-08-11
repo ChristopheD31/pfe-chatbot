@@ -17,6 +17,8 @@ L'API est hébergé sur la plateforme Heroku et est [accessible publiquement](ht
 #### Documentation
 La documentation complète a été réalisée sur Postman et est [accessible publiquement](https://documenter.getpostman.com/view/9506110/T1Dv9FAg?version=latest).
 
+Un guide utilisateur rapide est aussi disponible dans le dossier UserGuide de se repository.
+
 #### Déploiement automatique
 L'outil [CircleCi](https://circleci.com/) est utilisé afin de déclencher un traitement comprenant une suite de tests et un déploiement automatique sur Heroku lorsque du code est poussé sur la branche _master_. La configuration propre à cet outil est effectuée dans le dossier [.circleci](/.circleci/config.yml).
 
